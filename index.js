@@ -39,7 +39,7 @@ let jobMorning = new CronJob(`${min} 8 * * 1-5`, () => {
 
 // 每周一到周五，20点00分~10分之间自动签到
 const min2 = Math.ceil(Math.random() * 10);//${min2}
-let jobNight = new CronJob(`${min2} 22 * * 1-5`, () => {
+let jobNight = new CronJob(`${min2} 20 * * 1-5`, () => {
     autoSign(2); // 自动打卡下班
 }, null, true, 'Asia/Shanghai');
 
