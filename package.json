@@ -1,0 +1,29 @@
+{
+  "name": "auto-m3",
+  "version": "1.0.0",
+  "description": "seeyon m3 app auto attendance",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giscafer/auto-m3.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/giscafer/auto-m3/issues"
+  },
+  "homepage": "https://github.com/giscafer/auto-m3#readme",
+  "dependencies": {
+    "cron": "^1.3.0",
+    "es6-promise": "^4.2.5",
+    "isomorphic-fetch": "^2.2.1",
+    "nodemailer": "^4.6.7",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
