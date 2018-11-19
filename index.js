@@ -69,11 +69,11 @@ async function autoSign(type) {
     if (attendanceErr || !result) {
         console.log('attendance error')
         console.log(attendanceErr)
-        return mail.sendErrorMail(config.reveiveEmail);
+        return mail.sendErrorMail(config.reveiveEmail,attendanceErr.msg);
     }
     console.log('成功！')
     return mail.sendSuccessMail(config.reveiveEmail, type);
 }
 
 //test
-autoSign(1);
+// autoSign(1);

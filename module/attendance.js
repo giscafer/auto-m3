@@ -1,9 +1,8 @@
 
-const handle = require('./handle');
 const config = require('./config');
 
 
-const getOptions = (JSESSIONID, type) => ({
+const getOptions = ({ JSESSIONID, type, longitude, latitude }) => ({
     method: 'POST',
     headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -18,11 +17,11 @@ const getOptions = (JSESSIONID, type) => ({
         "town": "天河区",
         "street": "陶庄路",
         "nearAddress": "广州一智通供应链管理有限公司",
-        "longitude": "113.320371",
-        "latitude": "23.162446",
+        "longitude": longitude,
+        "latitude": latitude,
         "sign": "广东省广州市天河区广州一智通供应链管理有限公司",
         "deviceId": "te",
-        "remark": "11",
+        "remark": "",
         "receiveIds": "",
         "fileIds": [],
         "source": 2,
@@ -36,10 +35,13 @@ const getOptions = (JSESSIONID, type) => ({
  * @param {*} type 签到类型
  */
 const attendance = (JSESSIONID, type) => {
-    const options = getOptions(JSESSIONID, type);
-    console.log(options)
-    const url = `http://193.112.250.216:9999/mobile_portal/seeyon/rest/attendance/save`;
-    console.log(url)
+
+    let longitude = `113.3203${Math.ceil(Math.random() * 10)}`;
+    let latitude = `23.16244${Math.ceil(Math.random() * 10)}`;
+
+    const options = getOptions({ JSESSIONID, type, latitude, longitude });
+    const url = `${config.apiurl}/seeyon/rest/attendance/save`;
+
     return new Promise((resolve, reject) => {
         fetch(url, options).then(response => {
             if (response.headers.get('content-type').match(/application\/json/)) {
