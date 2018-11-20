@@ -31,16 +31,22 @@ Linux(开源系统似乎都可以)下还有个 "/" 可以用. 在 Minute 字段�
 */
 
 // 定时任务执行
+ // 自动打卡上班
 // 每周一到周五，8点49分~9点整之间签到
-const min = Math.ceil(Math.random() * 10) + 49;
-let jobMorning = new CronJob(`${min} 8 * * 1-5`, () => {
-    autoSign(1); // 自动打卡上班
+const min = Math.ceil(Math.random() * 10);
+let jobMorning = new CronJob(`49 8 * * 1-5`, () => {
+    setTimeout(() => {
+        autoSign(1);
+    }, min * 60 * 1000);
 }, null, true, 'Asia/Shanghai');
 
+ // 自动打卡下班
 // 每周一到周五，20点00分~10分之间自动签到
 const min2 = Math.ceil(Math.random() * 10);//${min2}
-let jobNight = new CronJob(`${min2} 20 * * 1-5`, () => {
-    autoSign(2); // 自动打卡下班
+let jobNight = new CronJob(`0 20 * * 1-5`, () => {
+    setTimeout(()=>{
+        autoSign(2);
+    },min2 * 60 * 1000);
 }, null, true, 'Asia/Shanghai');
 
 // let job2 = new CronJob('*/5 * * * * *', () => {
@@ -49,6 +55,7 @@ let jobNight = new CronJob(`${min2} 20 * * 1-5`, () => {
 
 jobMorning.start();
 jobNight.start();
+console.log('job started');
 
 
 /**
@@ -76,4 +83,4 @@ async function autoSign(type) {
 }
 
 //test
-// autoSign(1);
+autoSign(1);
