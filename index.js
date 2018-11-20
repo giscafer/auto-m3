@@ -68,7 +68,7 @@ async function autoSign(type) {
 
     if (loginError || !token) {
         console.log('login error')
-        return mail.sendErrorMail(config.reveiveEmail);
+        return mail.sendErrorMail(config.reveiveEmail,loginError.msg);
     }
     console.log(token)
     const [attendanceErr, result] = await handle(attendance(token, type));
