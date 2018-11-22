@@ -31,7 +31,7 @@ Linux(开源系统似乎都可以)下还有个 "/" 可以用. 在 Minute 字段�
 */
 
 // 定时任务执行
- // 自动打卡上班
+// 自动打卡上班
 // 每周一到周五，8点49分~9点整之间签到
 let jobMorning = new CronJob(`49 8 * * 1-5`, () => {
     const min = Math.ceil(Math.random() * 10);
@@ -40,13 +40,13 @@ let jobMorning = new CronJob(`49 8 * * 1-5`, () => {
     }, min * 60 * 1000);
 }, null, true, 'Asia/Shanghai');
 
- // 自动打卡下班
+// 自动打卡下班
 // 每周一到周五，20点00分~10分之间自动签到
 let jobNight = new CronJob(`0 20 * * 1-5`, () => {
     const min2 = Math.ceil(Math.random() * 10);//${min2}
     setTimeout(()=>{
         autoSign(2);
-    },min2 * 60 * 1000);
+    }, min2 * 60 * 1000);
 }, null, true, 'Asia/Shanghai');
 
 // let job2 = new CronJob('*/5 * * * * *', () => {
@@ -68,7 +68,7 @@ async function autoSign(type) {
 
     if (loginError || !token) {
         console.log('login error')
-        return mail.sendErrorMail(config.reveiveEmail);
+        return mail.sendErrorMail(config.reveiveEmail, loginError.msg);
     }
     console.log(token)
     const [attendanceErr, result] = await handle(attendance(token, type));
@@ -76,9 +76,9 @@ async function autoSign(type) {
     if (attendanceErr || !result) {
         console.log('attendance error')
         console.log(attendanceErr)
-        return mail.sendErrorMail(config.reveiveEmail,attendanceErr.msg);
+        return mail.sendErrorMail(config.reveiveEmail, attendanceErr.msg);
     }
-    console.log('成功！')
+    console.log('成功！' + new Date())
     return mail.sendSuccessMail(config.reveiveEmail, type);
 }
 

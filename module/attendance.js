@@ -49,10 +49,10 @@ const attendance = (JSESSIONID, type) => {
             }
             return [];
         }).then(json => {
-            if (json.code !== '200') {
+            if (!json.success) {
                 return reject(json);
             }
-            return resolve(json.data.ticket);
+            return resolve(json);
 
         }).catch(err => {
             console.log('接口请求异常');
