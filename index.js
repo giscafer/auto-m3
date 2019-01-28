@@ -93,4 +93,4 @@ async function autoSign(type) {
 }
 
 //test
-autoSign(1);
+// autoSign(1);
